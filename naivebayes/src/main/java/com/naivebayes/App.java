@@ -10,7 +10,7 @@ public class App
 {
     public static void main( String[] args )
     {
-        String testedDataset = "pima-indians-diabetes.data";
+        String testedDataset = "ionosphere.data";
         NaiveBayes nb = new NaiveBayes(testedDataset, false);
 
         // Print messages
@@ -55,7 +55,7 @@ public class App
             for(Double predMapKey: recordRow.keySet()){
                 Double tmpVar = recordRow.get(predMapKey);
                 System.out.print("  ");
-                System.out.printf("%.2f", tmpVar.doubleValue());
+                System.out.printf("%.2f", tmpVar);
             }
             System.out.println();
         }

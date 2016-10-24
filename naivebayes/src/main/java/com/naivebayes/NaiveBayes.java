@@ -31,8 +31,12 @@ public class NaiveBayes {
 
     // Calculate probability from Gaussian
     public static Double calculateGaussianProb(Double x,Double mean,Double stdev){
-        Double exponent = exp(-pow(x-mean, 2) / (2*pow(stdev, 2)));
-        return (1 / (sqrt(2*Math.PI) * stdev)) * exponent;
+        Double stdPower = 2*pow(stdev, 2);
+        if(!stdPower.equals(0.0)){
+            Double exponent = exp(-pow(x-mean, 2) / stdPower);
+            return (1 / (sqrt(2*Math.PI) * stdev)) * exponent;
+        }
+        return 1.0;
     }
 
     public int predict(List<Double> prediction){

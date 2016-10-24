@@ -221,7 +221,12 @@ class TrainingSet {
         List<Double> newAttrs = new ArrayList<Double>();
 
         for(int i=0; i < rawInput.size(); i++){
-            tmpFeature = (rawInput.get(i) - meanVal[i]) / std[i];
+            if(std[i] != 0){
+                tmpFeature = (rawInput.get(i) - meanVal[i]) / std[i];
+            }
+            else{
+                tmpFeature = 0;
+            }
             newAttrs.add(tmpFeature);
         }
 
@@ -236,7 +241,13 @@ class TrainingSet {
         for(Observation singl: trainingSet){
             List<Double> newAttrs = new ArrayList<Double>();
             for(int i=0; i < singl.attributes.size(); i++){
-                tmpFeature = (singl.attributes.get(i) - meanVal[i]) / std[i];
+                // Prevent Nans
+                if(std[i] != 0) {
+                    tmpFeature = (singl.attributes.get(i) - meanVal[i]) / std[i];
+                }
+                else{
+                    tmpFeature = 0;
+                }
                 newAttrs.add(tmpFeature);
             }
             singl.attributes = newAttrs;

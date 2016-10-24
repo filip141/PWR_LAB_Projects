@@ -59,7 +59,7 @@ class TrainingSet {
         Double classObservation;
         int obsNumber;
 
-        // Find Data Set classes
+        // Find Data Set classes and create fullObservationSet
         for(List<Double> singleObservation: fullSet){
             if(classPosition){
                 obsAttributes = singleObservation.subList(1, singleObservation.size());
@@ -125,7 +125,7 @@ class TrainingSet {
         testSet = new ArrayList<Observation>();
         trainingSet = new ArrayList<Observation>();
 
-        testIndex += 1;
+        testIndex = (int) ((testIndex + 1) % dataSetParts);
         List<Observation> copiedList = new ArrayList<Observation>();
         for(Observation obs: crossValidationSets.get(testIndex)){
             copiedList.add(obs.clone());

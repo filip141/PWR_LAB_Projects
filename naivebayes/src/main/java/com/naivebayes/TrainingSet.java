@@ -183,7 +183,7 @@ class TrainingSet {
         }
 
         for(int i=0; i < arrayLen; i++){
-            result[i] = sqrt(result[i] / dataSet.size());
+            result[i] = sqrt((dataSet.size() / (dataSet.size() - 1)) * (result[i] / dataSet.size()));
         }
 
         return result;

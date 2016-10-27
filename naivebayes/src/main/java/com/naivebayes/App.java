@@ -12,7 +12,7 @@ public class App
     public static void main( String[] args )
     {
         String testedDataset = "pima-indians-diabetes.data";
-        NaiveBayes nb = new DiscreteNaiveBayes(testedDataset);
+        NaiveBayes nb = new ContinuousNaiveBayes(testedDataset, false);
 
         // Print messages
         System.out.println("Testing Naive Bayes Classifier.\n");

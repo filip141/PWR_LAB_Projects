@@ -1,25 +1,26 @@
 package com.naivebayes;
 
-import java.io.IOException;
 import java.util.*;
-
-import static java.lang.Math.exp;
-import static java.lang.Math.pow;
-import static java.lang.Math.sqrt;
-
-/**
- * Created by filip on 27.10.16.
- */
-package com.naivebayes;
 
 /**
  * Created by filip on 19.10.16.
  */
 public class DiscreteNaiveBayes extends NaiveBayes {
 
+    public DiscreteNaiveBayes(String dataPath, boolean classPosition, int bins, boolean equalFrequency, int efRecords) {
+        super(dataPath, classPosition, true, bins, equalFrequency, efRecords);
+    }
 
-    public DiscreteNaiveBayes(String dataPath, boolean classPosition, boolean discretValues) {
-        super(dataPath, classPosition, discretValues);
+    public DiscreteNaiveBayes(String dataPath, boolean classPosition){
+        super(dataPath, classPosition, true, 20, true, 5);
+    }
+
+    public DiscreteNaiveBayes(String dataPath){
+        super(dataPath, false, true, 20, true, 5);
+    }
+
+    public void shuffleTrainingSet(){
+        this.trainingSet.shuffle();
     }
 
     public int predict(List<Double> prediction){

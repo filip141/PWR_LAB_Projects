@@ -3,119 +3,25 @@ package com.naivebayes;
 import java.io.IOException;
 import java.util.*;
 
-import static java.lang.Math.exp;
-import static java.lang.Math.pow;
-import static java.lang.Math.sqrt;
-
 /**
  * Created by filip on 19.10.16.
  */
 public abstract class NaiveBayes {
 
-    private boolean discrete;
-    private TrainingSet trainingSet;
+    protected TrainingSet trainingSet;
 
-    public NaiveBayes(String dataPath, boolean classPosition, boolean discretValues){
+    public NaiveBayes(String dataPath, boolean classPosition, boolean discretValues, int bins,
+                      boolean equalFrequency, int efRec){
         try {
-            this.discrete = discretValues;
-            this.trainingSet =new TrainingSet(dataPath, classPosition, discretValues);
-            // Normalize only for discrete values
-            if(!discretValues){
-                this.trainingSet.normTrainingSet();
-            }
-
+            this.trainingSet =new TrainingSet(dataPath, classPosition, discretValues, bins, equalFrequency, efRec);
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    public void shuffleTrainingSet(){
-        this.trainingSet.shuffle();
-        if(!discrete){
-            this.trainingSet.normTrainingSet();
-        }
-    }
+    public abstract int predict(List<Double> prediction);
 
-    // Calculate probability from Gaussian
-    public static Double calculateGaussianProb(Double x,Double mean,Double stdev){
-        Double stdPower = 2*pow(stdev, 2);
-        if(!stdPower.equals(0.0)){
-            Double exponent = exp(-pow(x-mean, 2) / stdPower);
-            return (1 / (sqrt(2*Math.PI) * stdev)) * exponent;
-        }
-        return 1.0;
-    }
-
-    public int predict(List<Double> prediction){
-        double[] means;
-        double[] stdevs;
-        double tmpPrediction;
-        int finalResult = 0;
-        List<Double> predictionNew = trainingSet.normalizeRecord(prediction);
-
-        // Define predict classes and map
-        Set<Double> classes = trainingSet.getClasses();
-        Map<Double, Double> predictResults = new HashMap<Double, Double>();
-        for(Double nbClass: classes){
-            tmpPrediction = 1;
-            // Define mean and std_dev
-            means = TrainingSet.mean(TrainingSet.getTrainingDataByClass(nbClass.intValue(),
-                    trainingSet.getTrainingData()));
-            stdevs = TrainingSet.stddev(TrainingSet.getTrainingDataByClass(nbClass.intValue(),
-                    trainingSet.getTrainingData()));
-            for(int i = 0; i < predictionNew.size(); i++){
-                tmpPrediction *= calculateGaussianProb(predictionNew.get(i), means[i], stdevs[i]);
-            }
-            predictResults.put(nbClass, tmpPrediction);
-        }
-        Double maxValueInMap = (Collections.max(predictResults.values()));
-        for (Map.Entry<Double, Double> entry : predictResults.entrySet()) {
-            if (entry.getValue().equals(maxValueInMap)) {
-                finalResult = entry.getKey().intValue();
-            }
-        }
-
-        return finalResult;
-    }
-
-    public int predictDiscrete(List<Double> prediction){
-
-        Observation obs;
-        int finalResult = 0;
-        List<Observation> trainingByID;
-        obs = new Observation(prediction, 0);
-        obs = trainingSet.discretize(obs);
-
-        int counterAll;
-        int counterStrike;
-        double tmpPrediction;
-        Set<Double> classes = trainingSet.getClasses();
-        Map<Double, Double> predictResults = new HashMap<Double, Double>();
-        for(Double nbClass: classes){
-            tmpPrediction = 1.0;
-            trainingByID = TrainingSet.getTrainingDataByClass(nbClass.intValue(), trainingSet.getTrainingData());
-            counterAll = trainingByID.size();
-            for(int i = 0; i < obs.attributes.size(); i++){
-                counterStrike = 1;
-                for (Observation trainObs: trainingByID){
-                    if(trainObs.attributes.get(i).equals(obs.attributes.get(i))){
-                        counterStrike += 1;
-                    }
-                }
-                tmpPrediction *= counterStrike / (1.0 * counterAll);
-            }
-            predictResults.put(nbClass, tmpPrediction);
-        }
-
-        Double maxValueInMap = (Collections.max(predictResults.values()));
-        for (Map.Entry<Double, Double> entry : predictResults.entrySet()) {
-            if (entry.getValue().equals(maxValueInMap)) {
-                finalResult = entry.getKey().intValue();
-            }
-        }
-
-        return finalResult;
-    }
+    public abstract void shuffleTrainingSet();
 
     public Map<Double, Map<Double, Double>> getConfusionMatrix(){
 
@@ -140,7 +46,7 @@ public abstract class NaiveBayes {
         // Create confusionMatrix
         for(int tr = 0; tr < 10; tr++){
             for(Observation testedObs: testSet){
-                predictedClass = (double) this.predictDiscrete(testedObs.attributes);
+                predictedClass = (double) this.predict(testedObs.attributes);
                 tmpMapRecord = confusionMatrix.get((double) testedObs.label);
                 recordCounter = tmpMapRecord.get(predictedClass) + 1;
                 tmpMapRecord.put(predictedClass, recordCounter);
@@ -237,5 +143,42 @@ public abstract class NaiveBayes {
         }
 
         return recallMatrix;
+    }
+
+    public Map<Double, Map<Double, Double>> getPrecision(Map<Double, Map<Double, Double>> confusionMatrix){
+
+        // Declare confusion Matrix map
+        double predByClass;
+        Map<Double, Map<Double, Double>> precMatrix = new HashMap<Double, Map<Double, Double>>();
+
+        // Initialize confusionMatrix map
+        for(Double actMapKey: confusionMatrix.keySet()){
+            Map<Double, Double> recordRow = confusionMatrix.get(actMapKey);
+            Map<Double, Double> mapRecord = new HashMap<Double, Double>();
+            for(Double predMapKey: recordRow.keySet()){
+                predByClass = getPredictedById(predMapKey, confusionMatrix);
+                Double tmpVar = recordRow.get(predMapKey);
+                mapRecord.put(predMapKey, tmpVar / predByClass);
+            }
+            precMatrix.put(actMapKey, mapRecord);
+        }
+
+        return precMatrix;
+    }
+
+    public List<Double> getFsCore(Map<Double, Map<Double, Double>> confusionMatrix){
+        List<Double> fsCore = new ArrayList<Double>();
+        Map<Double, Map<Double, Double>> precMatrix = getPrecision(confusionMatrix);
+        Map<Double, Map<Double, Double>> recallMatrix = getRecall(confusionMatrix);
+
+        for(Double mapKey: precMatrix.keySet()){
+            Map<Double, Double> recordPrecRow = precMatrix.get(mapKey);
+            Double tmpPrecVar = recordPrecRow.get(mapKey);
+            Map<Double, Double> recordRecRow = recallMatrix.get(mapKey);
+            Double tmpRecVar = recordRecRow.get(mapKey);
+
+            fsCore.add(2*((tmpPrecVar * tmpRecVar) / (tmpPrecVar + tmpRecVar)));
+        }
+        return fsCore;
     }
 }

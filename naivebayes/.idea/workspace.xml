@@ -2,17 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1eabd1ea-7a69-4628-9f24-99260e0ca3b9" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/naivebayes/DiscreteNaiveBayes.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/naivebayes/ContinuousNaiveBayes.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../UmlProject" afterPath="$PROJECT_DIR$/../UmlProject" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/com/naivebayes/App.class" afterPath="$PROJECT_DIR$/target/classes/com/naivebayes/App.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/com/naivebayes/DataFile.class" afterPath="$PROJECT_DIR$/target/classes/com/naivebayes/DataFile.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/com/naivebayes/NaiveBayes.class" afterPath="$PROJECT_DIR$/target/classes/com/naivebayes/NaiveBayes.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/com/naivebayes/Observation.class" afterPath="$PROJECT_DIR$/target/classes/com/naivebayes/Observation.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/com/naivebayes/TrainingSet.class" afterPath="$PROJECT_DIR$/target/classes/com/naivebayes/TrainingSet.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/dictionaries/filip.xml" afterPath="$PROJECT_DIR$/.idea/dictionaries/filip.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/naivebayes/App.java" afterPath="$PROJECT_DIR$/src/main/java/com/naivebayes/App.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/naivebayes/DataFile.java" afterPath="$PROJECT_DIR$/src/main/java/com/naivebayes/DataFile.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/naivebayes/DiscreteNaiveBayes.java" afterPath="$PROJECT_DIR$/src/main/java/com/naivebayes/DiscreteNaiveBayes.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/naivebayes/NaiveBayes.java" afterPath="$PROJECT_DIR$/src/main/java/com/naivebayes/NaiveBayes.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/naivebayes/TrainingSet.java" afterPath="$PROJECT_DIR$/src/main/java/com/naivebayes/TrainingSet.java" />
     </list>
@@ -47,34 +42,52 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="App.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="App.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/naivebayes/App.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="174">
-              <caret line="12" column="42" selection-start-line="12" selection-start-column="42" selection-end-line="12" selection-end-column="42" />
-              <folding />
+            <state relative-caret-position="-541">
+              <caret line="14" column="60" selection-start-line="14" selection-start-column="60" selection-end-line="14" selection-end-column="60" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="NaiveBayes.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="NaiveBayes.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/naivebayes/NaiveBayes.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="378">
-              <caret line="21" column="0" selection-start-line="21" selection-start-column="0" selection-end-line="24" selection-end-column="13" />
+            <state relative-caret-position="342">
+              <caret line="19" column="5" selection-start-line="19" selection-start-column="5" selection-end-line="19" selection-end-column="5" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#1705#1721#0" expanded="true" />
-                <element signature="e#3125#3141#0" expanded="true" />
-                <element signature="e#4550#4579#0" expanded="true" />
-                <element signature="e#4741#4757#0" expanded="true" />
+                <element signature="method#getConfusionMatrix#0;class#NaiveBayes#0" expanded="false" />
+                <element signature="e#1044#1073#0" expanded="true" />
+                <element signature="e#1235#1251#0" expanded="true" />
                 <element signature="method#getPredictedById#0;class#NaiveBayes#0" expanded="false" />
                 <element signature="method#getActualById#0;class#NaiveBayes#0" expanded="false" />
                 <element signature="method#getAccuracy#0;class#NaiveBayes#0" expanded="false" />
                 <element signature="method#getMissClassRate#0;class#NaiveBayes#0" expanded="false" />
                 <element signature="method#getRecall#0;class#NaiveBayes#0" expanded="false" />
-                <element signature="e#7899#7928#0" expanded="true" />
-                <element signature="e#8163#8179#0" expanded="true" />
+                <element signature="e#4385#4414#0" expanded="true" />
+                <element signature="e#4649#4665#0" expanded="true" />
+                <element signature="method#getPrecision#0;class#NaiveBayes#0" expanded="false" />
+                <element signature="e#5277#5306#0" expanded="true" />
+                <element signature="e#5541#5557#0" expanded="true" />
+                <element signature="e#6055#6063#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ContinuousNaiveBayes.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/naivebayes/ContinuousNaiveBayes.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="342">
+              <caret line="19" column="43" selection-start-line="19" selection-start-column="43" selection-end-line="19" selection-end-column="43" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#1468#1484#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -83,11 +96,15 @@
       <file leaf-file-name="DiscreteNaiveBayes.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/naivebayes/DiscreteNaiveBayes.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="252">
-              <caret line="20" column="4" selection-start-line="20" selection-start-column="4" selection-end-line="20" selection-end-column="4" />
+            <state relative-caret-position="324">
+              <caret line="18" column="29" selection-start-line="18" selection-start-column="29" selection-end-line="18" selection-end-column="29" />
               <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#924#940#0" expanded="true" />
+                <element signature="e#531#532#0" expanded="true" />
+                <element signature="e#588#589#0" expanded="true" />
+                <element signature="e#627#628#0" expanded="true" />
+                <element signature="e#669#670#0" expanded="true" />
+                <element signature="method#predict#0;class#DiscreteNaiveBayes#0" expanded="false" />
+                <element signature="e#1099#1115#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -96,40 +113,43 @@
       <file leaf-file-name="TrainingSet.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/naivebayes/TrainingSet.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-978">
-              <caret line="82" column="0" selection-start-line="82" selection-start-column="0" selection-end-line="82" selection-end-column="0" />
+            <state relative-caret-position="127">
+              <caret line="51" column="45" selection-start-line="51" selection-start-column="31" selection-end-line="51" selection-end-column="45" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="class#Observation#0" expanded="false" />
                 <element signature="method#clone#0;class#Observation#0" expanded="false" />
                 <element signature="e#496#504#0" expanded="true" />
-                <element signature="e#2350#2363#0" expanded="true" />
-                <element signature="e#2676#2689#0" expanded="true" />
+                <element signature="e#2494#2507#0" expanded="true" />
+                <element signature="e#2820#2833#0" expanded="true" />
                 <element signature="method#discretize#0;class#TrainingSet#0" expanded="false" />
                 <element signature="method#TrainingSetDiscretization#0;class#TrainingSet#0" expanded="false" />
+                <element signature="method#getDiscretizationRegionsEqualWidth#0;class#TrainingSet#0" expanded="false" />
+                <element signature="e#4787#4803#0" expanded="true" />
+                <element signature="method#getDiscretizationRegionsEqualFrequency#0;class#TrainingSet#0" expanded="false" />
+                <element signature="e#6089#6105#0" expanded="true" />
                 <element signature="method#getDiscretizationRegions#0;class#TrainingSet#0" expanded="false" />
-                <element signature="e#4632#4648#0" expanded="true" />
-                <element signature="e#4700#4708#0" expanded="true" />
                 <element signature="method#generateObservationList#0;class#TrainingSet#0" expanded="false" />
-                <element signature="e#5861#5874#0" expanded="true" />
-                <element signature="e#6836#6863#0" expanded="true" />
-                <element signature="e#6921#6938#0" expanded="true" />
-                <element signature="e#8338#8351#0" expanded="true" />
-                <element signature="e#8663#8676#0" expanded="true" />
+                <element signature="e#7874#7887#0" expanded="true" />
+                <element signature="e#8849#8876#0" expanded="true" />
+                <element signature="e#8934#8951#0" expanded="true" />
+                <element signature="method#shuffle#0;class#TrainingSet#0" expanded="false" />
+                <element signature="e#10351#10364#0" expanded="true" />
+                <element signature="e#10676#10689#0" expanded="true" />
                 <element signature="method#sum#0;class#TrainingSet#0" expanded="false" />
                 <element signature="method#mean#0;class#TrainingSet#0" expanded="false" />
                 <element signature="method#stddev#0;class#TrainingSet#0" expanded="false" />
                 <element signature="method#getTrainingDataByClass#0;class#TrainingSet#0" expanded="false" />
-                <element signature="e#10531#10544#0" expanded="true" />
+                <element signature="e#12544#12557#0" expanded="true" />
                 <element signature="method#normalizeObsRec#0;class#TrainingSet#0" expanded="false" />
-                <element signature="e#10881#10894#0" expanded="true" />
-                <element signature="e#10990#10998#0" expanded="true" />
+                <element signature="e#12894#12907#0" expanded="true" />
+                <element signature="e#13003#13011#0" expanded="true" />
                 <element signature="method#normalizeRecord#0;class#TrainingSet#0" expanded="false" />
-                <element signature="e#11451#11459#0" expanded="true" />
+                <element signature="e#13464#13472#0" expanded="true" />
                 <element signature="method#normTrainingSet#0;class#TrainingSet#0" expanded="false" />
-                <element signature="e#11889#11902#0" expanded="true" />
-                <element signature="e#12001#12009#0" expanded="true" />
-                <marker date="1477582208473" expanded="false" signature="6745:8074" ph="{...}" />
+                <element signature="e#13902#13915#0" expanded="true" />
+                <element signature="e#14014#14022#0" expanded="true" />
+                <marker date="1477593495267" expanded="false" signature="8758:10087" ph="{...}" />
               </folding>
             </state>
           </provider>
@@ -189,9 +209,10 @@
         <option value="$PROJECT_DIR$/src/main/resources/breast_cancer.data" />
         <option value="$PROJECT_DIR$/src/main/java/com/naivebayes/DataFile.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/naivebayes/TrainingSet.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/naivebayes/App.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/naivebayes/DiscreteNaiveBayes.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/naivebayes/NaiveBayes.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/naivebayes/ContinuousNaiveBayes.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/naivebayes/DiscreteNaiveBayes.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/naivebayes/App.java" />
       </list>
     </option>
   </component>
@@ -308,36 +329,6 @@
             <PATH_ELEMENT>
               <option name="myItemId" value="resources" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="naivebayes" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="naivebayes" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="naivebayes" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="TrainingSet.java" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.ClassesTreeStructureProvider$PsiClassOwnerTreeNode" />
             </PATH_ELEMENT>
           </PATH>
           <PATH>
@@ -694,7 +685,14 @@
       <option name="project" value="LOCAL" />
       <updated>1477351458731</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="temporary">
+      <created>1477584544267</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1477584544267</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -741,55 +739,12 @@
     <MESSAGE value="zero in stddev correction" />
     <MESSAGE value="ionosphere dataset added" />
     <MESSAGE value="breast cancer dataset added" />
-    <option name="LAST_COMMIT_MESSAGE" value="breast cancer dataset added" />
+    <MESSAGE value="temporary" />
+    <option name="LAST_COMMIT_MESSAGE" value="temporary" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/naivebayes/App.java</url>
-          <line>21</line>
-          <properties />
-          <option name="timeStamp" value="191" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/naivebayes/NaiveBayes.java</url>
-          <line>116</line>
-          <properties />
-          <option name="timeStamp" value="196" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/naivebayes/NaiveBayes.java</url>
-          <line>142</line>
-          <properties />
-          <option name="timeStamp" value="197" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/naivebayes/NaiveBayes.java</url>
-          <line>90</line>
-          <properties />
-          <option name="timeStamp" value="198" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/naivebayes/NaiveBayes.java</url>
-          <line>106</line>
-          <properties />
-          <option name="timeStamp" value="200" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/naivebayes/NaiveBayes.java</url>
-          <line>104</line>
-          <properties />
-          <option name="timeStamp" value="201" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/naivebayes/App.java</url>
-          <line>13</line>
-          <properties />
-          <option name="timeStamp" value="203" />
-        </line-breakpoint>
-      </breakpoints>
-      <option name="time" value="207" />
+      <option name="time" value="218" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -810,7 +765,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -820,17 +777,20 @@
           <caret line="19" column="0" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#1705#1721#0" expanded="true" />
-            <element signature="e#3125#3141#0" expanded="true" />
-            <element signature="e#4550#4579#0" expanded="true" />
-            <element signature="e#4741#4757#0" expanded="true" />
+            <element signature="method#getConfusionMatrix#0;class#NaiveBayes#0" expanded="false" />
+            <element signature="e#1044#1073#0" expanded="true" />
+            <element signature="e#1235#1251#0" expanded="true" />
             <element signature="method#getPredictedById#0;class#NaiveBayes#0" expanded="false" />
             <element signature="method#getActualById#0;class#NaiveBayes#0" expanded="false" />
             <element signature="method#getAccuracy#0;class#NaiveBayes#0" expanded="false" />
             <element signature="method#getMissClassRate#0;class#NaiveBayes#0" expanded="false" />
             <element signature="method#getRecall#0;class#NaiveBayes#0" expanded="false" />
-            <element signature="e#7899#7928#0" expanded="true" />
-            <element signature="e#8163#8179#0" expanded="true" />
+            <element signature="e#4385#4414#0" expanded="true" />
+            <element signature="e#4649#4665#0" expanded="true" />
+            <element signature="method#getPrecision#0;class#NaiveBayes#0" expanded="false" />
+            <element signature="e#5277#5306#0" expanded="true" />
+            <element signature="e#5541#5557#0" expanded="true" />
+            <element signature="e#6055#6063#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -856,33 +816,36 @@
             <element signature="class#Observation#0" expanded="false" />
             <element signature="method#clone#0;class#Observation#0" expanded="false" />
             <element signature="e#496#504#0" expanded="true" />
-            <element signature="e#2350#2363#0" expanded="true" />
-            <element signature="e#2676#2689#0" expanded="true" />
+            <element signature="e#2494#2507#0" expanded="true" />
+            <element signature="e#2820#2833#0" expanded="true" />
             <element signature="method#discretize#0;class#TrainingSet#0" expanded="false" />
             <element signature="method#TrainingSetDiscretization#0;class#TrainingSet#0" expanded="false" />
+            <element signature="method#getDiscretizationRegionsEqualWidth#0;class#TrainingSet#0" expanded="false" />
+            <element signature="e#4787#4803#0" expanded="true" />
+            <element signature="method#getDiscretizationRegionsEqualFrequency#0;class#TrainingSet#0" expanded="false" />
+            <element signature="e#6089#6105#0" expanded="true" />
             <element signature="method#getDiscretizationRegions#0;class#TrainingSet#0" expanded="false" />
-            <element signature="e#4632#4648#0" expanded="true" />
-            <element signature="e#4700#4708#0" expanded="true" />
             <element signature="method#generateObservationList#0;class#TrainingSet#0" expanded="false" />
-            <element signature="e#5861#5874#0" expanded="true" />
-            <element signature="e#6836#6863#0" expanded="true" />
-            <element signature="e#6921#6938#0" expanded="true" />
-            <element signature="e#8338#8351#0" expanded="true" />
-            <element signature="e#8663#8676#0" expanded="true" />
+            <element signature="e#7874#7887#0" expanded="true" />
+            <element signature="e#8849#8876#0" expanded="true" />
+            <element signature="e#8934#8951#0" expanded="true" />
+            <element signature="method#shuffle#0;class#TrainingSet#0" expanded="false" />
+            <element signature="e#10351#10364#0" expanded="true" />
+            <element signature="e#10676#10689#0" expanded="true" />
             <element signature="method#sum#0;class#TrainingSet#0" expanded="false" />
             <element signature="method#mean#0;class#TrainingSet#0" expanded="false" />
             <element signature="method#stddev#0;class#TrainingSet#0" expanded="false" />
             <element signature="method#getTrainingDataByClass#0;class#TrainingSet#0" expanded="false" />
-            <element signature="e#10531#10544#0" expanded="true" />
+            <element signature="e#12544#12557#0" expanded="true" />
             <element signature="method#normalizeObsRec#0;class#TrainingSet#0" expanded="false" />
-            <element signature="e#10881#10894#0" expanded="true" />
-            <element signature="e#10990#10998#0" expanded="true" />
+            <element signature="e#12894#12907#0" expanded="true" />
+            <element signature="e#13003#13011#0" expanded="true" />
             <element signature="method#normalizeRecord#0;class#TrainingSet#0" expanded="false" />
-            <element signature="e#11451#11459#0" expanded="true" />
+            <element signature="e#13464#13472#0" expanded="true" />
             <element signature="method#normTrainingSet#0;class#TrainingSet#0" expanded="false" />
-            <element signature="e#11889#11902#0" expanded="true" />
-            <element signature="e#12001#12009#0" expanded="true" />
-            <marker date="1477582208473" expanded="false" signature="6745:8074" ph="{...}" />
+            <element signature="e#13902#13915#0" expanded="true" />
+            <element signature="e#14014#14022#0" expanded="true" />
+            <marker date="1477593495267" expanded="false" signature="8758:10087" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -915,7 +878,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="216">
           <caret line="12" column="0" selection-start-line="12" selection-start-column="0" selection-end-line="20" selection-end-column="42" />
-          <folding />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -925,17 +890,20 @@
           <caret line="19" column="0" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#1705#1721#0" expanded="true" />
-            <element signature="e#3125#3141#0" expanded="true" />
-            <element signature="e#4550#4579#0" expanded="true" />
-            <element signature="e#4741#4757#0" expanded="true" />
+            <element signature="method#getConfusionMatrix#0;class#NaiveBayes#0" expanded="false" />
+            <element signature="e#1044#1073#0" expanded="true" />
+            <element signature="e#1235#1251#0" expanded="true" />
             <element signature="method#getPredictedById#0;class#NaiveBayes#0" expanded="false" />
             <element signature="method#getActualById#0;class#NaiveBayes#0" expanded="false" />
             <element signature="method#getAccuracy#0;class#NaiveBayes#0" expanded="false" />
             <element signature="method#getMissClassRate#0;class#NaiveBayes#0" expanded="false" />
             <element signature="method#getRecall#0;class#NaiveBayes#0" expanded="false" />
-            <element signature="e#7899#7928#0" expanded="true" />
-            <element signature="e#8163#8179#0" expanded="true" />
+            <element signature="e#4385#4414#0" expanded="true" />
+            <element signature="e#4649#4665#0" expanded="true" />
+            <element signature="method#getPrecision#0;class#NaiveBayes#0" expanded="false" />
+            <element signature="e#5277#5306#0" expanded="true" />
+            <element signature="e#5541#5557#0" expanded="true" />
+            <element signature="e#6055#6063#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -952,7 +920,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -962,17 +932,20 @@
           <caret line="36" column="28" selection-start-line="36" selection-start-column="28" selection-end-line="36" selection-end-column="28" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#1705#1721#0" expanded="true" />
-            <element signature="e#3125#3141#0" expanded="true" />
-            <element signature="e#4550#4579#0" expanded="true" />
-            <element signature="e#4741#4757#0" expanded="true" />
+            <element signature="method#getConfusionMatrix#0;class#NaiveBayes#0" expanded="false" />
+            <element signature="e#1044#1073#0" expanded="true" />
+            <element signature="e#1235#1251#0" expanded="true" />
             <element signature="method#getPredictedById#0;class#NaiveBayes#0" expanded="false" />
             <element signature="method#getActualById#0;class#NaiveBayes#0" expanded="false" />
             <element signature="method#getAccuracy#0;class#NaiveBayes#0" expanded="false" />
             <element signature="method#getMissClassRate#0;class#NaiveBayes#0" expanded="false" />
             <element signature="method#getRecall#0;class#NaiveBayes#0" expanded="false" />
-            <element signature="e#7899#7928#0" expanded="true" />
-            <element signature="e#8163#8179#0" expanded="true" />
+            <element signature="e#4385#4414#0" expanded="true" />
+            <element signature="e#4649#4665#0" expanded="true" />
+            <element signature="method#getPrecision#0;class#NaiveBayes#0" expanded="false" />
+            <element signature="e#5277#5306#0" expanded="true" />
+            <element signature="e#5541#5557#0" expanded="true" />
+            <element signature="e#6055#6063#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -998,33 +971,36 @@
             <element signature="class#Observation#0" expanded="false" />
             <element signature="method#clone#0;class#Observation#0" expanded="false" />
             <element signature="e#496#504#0" expanded="true" />
-            <element signature="e#2350#2363#0" expanded="true" />
-            <element signature="e#2676#2689#0" expanded="true" />
+            <element signature="e#2494#2507#0" expanded="true" />
+            <element signature="e#2820#2833#0" expanded="true" />
             <element signature="method#discretize#0;class#TrainingSet#0" expanded="false" />
             <element signature="method#TrainingSetDiscretization#0;class#TrainingSet#0" expanded="false" />
+            <element signature="method#getDiscretizationRegionsEqualWidth#0;class#TrainingSet#0" expanded="false" />
+            <element signature="e#4787#4803#0" expanded="true" />
+            <element signature="method#getDiscretizationRegionsEqualFrequency#0;class#TrainingSet#0" expanded="false" />
+            <element signature="e#6089#6105#0" expanded="true" />
             <element signature="method#getDiscretizationRegions#0;class#TrainingSet#0" expanded="false" />
-            <element signature="e#4632#4648#0" expanded="true" />
-            <element signature="e#4700#4708#0" expanded="true" />
             <element signature="method#generateObservationList#0;class#TrainingSet#0" expanded="false" />
-            <element signature="e#5861#5874#0" expanded="true" />
-            <element signature="e#6836#6863#0" expanded="true" />
-            <element signature="e#6921#6938#0" expanded="true" />
-            <element signature="e#8338#8351#0" expanded="true" />
-            <element signature="e#8663#8676#0" expanded="true" />
+            <element signature="e#7874#7887#0" expanded="true" />
+            <element signature="e#8849#8876#0" expanded="true" />
+            <element signature="e#8934#8951#0" expanded="true" />
+            <element signature="method#shuffle#0;class#TrainingSet#0" expanded="false" />
+            <element signature="e#10351#10364#0" expanded="true" />
+            <element signature="e#10676#10689#0" expanded="true" />
             <element signature="method#sum#0;class#TrainingSet#0" expanded="false" />
             <element signature="method#mean#0;class#TrainingSet#0" expanded="false" />
             <element signature="method#stddev#0;class#TrainingSet#0" expanded="false" />
             <element signature="method#getTrainingDataByClass#0;class#TrainingSet#0" expanded="false" />
-            <element signature="e#10531#10544#0" expanded="true" />
+            <element signature="e#12544#12557#0" expanded="true" />
             <element signature="method#normalizeObsRec#0;class#TrainingSet#0" expanded="false" />
-            <element signature="e#10881#10894#0" expanded="true" />
-            <element signature="e#10990#10998#0" expanded="true" />
+            <element signature="e#12894#12907#0" expanded="true" />
+            <element signature="e#13003#13011#0" expanded="true" />
             <element signature="method#normalizeRecord#0;class#TrainingSet#0" expanded="false" />
-            <element signature="e#11451#11459#0" expanded="true" />
+            <element signature="e#13464#13472#0" expanded="true" />
             <element signature="method#normTrainingSet#0;class#TrainingSet#0" expanded="false" />
-            <element signature="e#11889#11902#0" expanded="true" />
-            <element signature="e#12001#12009#0" expanded="true" />
-            <marker date="1477582208473" expanded="false" signature="6745:8074" ph="{...}" />
+            <element signature="e#13902#13915#0" expanded="true" />
+            <element signature="e#14014#14022#0" expanded="true" />
+            <marker date="1477593495267" expanded="false" signature="8758:10087" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -1100,82 +1076,113 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/naivebayes/App.java">
+    <entry file="jar:///usr/lib/jvm/java-8-oracle/src.zip!/java/util/Comparator.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="174">
-          <caret line="12" column="42" selection-start-line="12" selection-start-column="42" selection-end-line="12" selection-end-column="42" />
+        <state relative-caret-position="202">
+          <caret line="149" column="8" selection-start-line="149" selection-start-column="8" selection-end-line="149" selection-end-column="8" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/naivebayes/TrainingSet.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-978">
-          <caret line="82" column="0" selection-start-line="82" selection-start-column="0" selection-end-line="82" selection-end-column="0" />
+        <state relative-caret-position="127">
+          <caret line="51" column="45" selection-start-line="51" selection-start-column="31" selection-end-line="51" selection-end-column="45" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="class#Observation#0" expanded="false" />
             <element signature="method#clone#0;class#Observation#0" expanded="false" />
             <element signature="e#496#504#0" expanded="true" />
-            <element signature="e#2350#2363#0" expanded="true" />
-            <element signature="e#2676#2689#0" expanded="true" />
+            <element signature="e#2494#2507#0" expanded="true" />
+            <element signature="e#2820#2833#0" expanded="true" />
             <element signature="method#discretize#0;class#TrainingSet#0" expanded="false" />
             <element signature="method#TrainingSetDiscretization#0;class#TrainingSet#0" expanded="false" />
+            <element signature="method#getDiscretizationRegionsEqualWidth#0;class#TrainingSet#0" expanded="false" />
+            <element signature="e#4787#4803#0" expanded="true" />
+            <element signature="method#getDiscretizationRegionsEqualFrequency#0;class#TrainingSet#0" expanded="false" />
+            <element signature="e#6089#6105#0" expanded="true" />
             <element signature="method#getDiscretizationRegions#0;class#TrainingSet#0" expanded="false" />
-            <element signature="e#4632#4648#0" expanded="true" />
-            <element signature="e#4700#4708#0" expanded="true" />
             <element signature="method#generateObservationList#0;class#TrainingSet#0" expanded="false" />
-            <element signature="e#5861#5874#0" expanded="true" />
-            <element signature="e#6836#6863#0" expanded="true" />
-            <element signature="e#6921#6938#0" expanded="true" />
-            <element signature="e#8338#8351#0" expanded="true" />
-            <element signature="e#8663#8676#0" expanded="true" />
+            <element signature="e#7874#7887#0" expanded="true" />
+            <element signature="e#8849#8876#0" expanded="true" />
+            <element signature="e#8934#8951#0" expanded="true" />
+            <element signature="method#shuffle#0;class#TrainingSet#0" expanded="false" />
+            <element signature="e#10351#10364#0" expanded="true" />
+            <element signature="e#10676#10689#0" expanded="true" />
             <element signature="method#sum#0;class#TrainingSet#0" expanded="false" />
             <element signature="method#mean#0;class#TrainingSet#0" expanded="false" />
             <element signature="method#stddev#0;class#TrainingSet#0" expanded="false" />
             <element signature="method#getTrainingDataByClass#0;class#TrainingSet#0" expanded="false" />
-            <element signature="e#10531#10544#0" expanded="true" />
+            <element signature="e#12544#12557#0" expanded="true" />
             <element signature="method#normalizeObsRec#0;class#TrainingSet#0" expanded="false" />
-            <element signature="e#10881#10894#0" expanded="true" />
-            <element signature="e#10990#10998#0" expanded="true" />
+            <element signature="e#12894#12907#0" expanded="true" />
+            <element signature="e#13003#13011#0" expanded="true" />
             <element signature="method#normalizeRecord#0;class#TrainingSet#0" expanded="false" />
-            <element signature="e#11451#11459#0" expanded="true" />
+            <element signature="e#13464#13472#0" expanded="true" />
             <element signature="method#normTrainingSet#0;class#TrainingSet#0" expanded="false" />
-            <element signature="e#11889#11902#0" expanded="true" />
-            <element signature="e#12001#12009#0" expanded="true" />
-            <marker date="1477582208473" expanded="false" signature="6745:8074" ph="{...}" />
+            <element signature="e#13902#13915#0" expanded="true" />
+            <element signature="e#14014#14022#0" expanded="true" />
+            <marker date="1477593495267" expanded="false" signature="8758:10087" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/naivebayes/ContinuousNaiveBayes.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="342">
+          <caret line="19" column="43" selection-start-line="19" selection-start-column="43" selection-end-line="19" selection-end-column="43" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#1468#1484#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/naivebayes/DiscreteNaiveBayes.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="252">
-          <caret line="20" column="4" selection-start-line="20" selection-start-column="4" selection-end-line="20" selection-end-column="4" />
+        <state relative-caret-position="324">
+          <caret line="18" column="29" selection-start-line="18" selection-start-column="29" selection-end-line="18" selection-end-column="29" />
           <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#924#940#0" expanded="true" />
+            <element signature="e#531#532#0" expanded="true" />
+            <element signature="e#588#589#0" expanded="true" />
+            <element signature="e#627#628#0" expanded="true" />
+            <element signature="e#669#670#0" expanded="true" />
+            <element signature="method#predict#0;class#DiscreteNaiveBayes#0" expanded="false" />
+            <element signature="e#1099#1115#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/naivebayes/NaiveBayes.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="378">
-          <caret line="21" column="0" selection-start-line="21" selection-start-column="0" selection-end-line="24" selection-end-column="13" />
+        <state relative-caret-position="342">
+          <caret line="19" column="5" selection-start-line="19" selection-start-column="5" selection-end-line="19" selection-end-column="5" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#1705#1721#0" expanded="true" />
-            <element signature="e#3125#3141#0" expanded="true" />
-            <element signature="e#4550#4579#0" expanded="true" />
-            <element signature="e#4741#4757#0" expanded="true" />
+            <element signature="method#getConfusionMatrix#0;class#NaiveBayes#0" expanded="false" />
+            <element signature="e#1044#1073#0" expanded="true" />
+            <element signature="e#1235#1251#0" expanded="true" />
             <element signature="method#getPredictedById#0;class#NaiveBayes#0" expanded="false" />
             <element signature="method#getActualById#0;class#NaiveBayes#0" expanded="false" />
             <element signature="method#getAccuracy#0;class#NaiveBayes#0" expanded="false" />
             <element signature="method#getMissClassRate#0;class#NaiveBayes#0" expanded="false" />
             <element signature="method#getRecall#0;class#NaiveBayes#0" expanded="false" />
-            <element signature="e#7899#7928#0" expanded="true" />
-            <element signature="e#8163#8179#0" expanded="true" />
+            <element signature="e#4385#4414#0" expanded="true" />
+            <element signature="e#4649#4665#0" expanded="true" />
+            <element signature="method#getPrecision#0;class#NaiveBayes#0" expanded="false" />
+            <element signature="e#5277#5306#0" expanded="true" />
+            <element signature="e#5541#5557#0" expanded="true" />
+            <element signature="e#6055#6063#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/naivebayes/App.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-541">
+          <caret line="14" column="60" selection-start-line="14" selection-start-column="60" selection-end-line="14" selection-end-column="60" />
+          <folding>
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>

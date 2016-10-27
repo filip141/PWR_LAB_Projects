@@ -36,6 +36,7 @@ class TrainingSet {
     public final static double dataSetParts = 10.0;
 
     double bins;
+    int efRecords;
     double[] meanVal;
     double[] std;
     boolean discreteValues;
@@ -47,7 +48,8 @@ class TrainingSet {
     private int testIndex;
 
     // Training set constructor
-    public TrainingSet(String dataPath, boolean classPosition, boolean discreteValues) throws IOException {
+    public TrainingSet(String dataPath, boolean classPosition, boolean discreteValues, int bins,
+                       boolean equalFrequency, int efRecords) throws IOException {
 
         // Full set initialization
         List<List<Double>> fullSet;
@@ -71,8 +73,9 @@ class TrainingSet {
 
         //Only for discrete values
         if(discreteValues){
-            bins = 20;
-            discretizationRegions = getDiscretizationRegions(fullObservationSet);
+            this.bins = bins;
+            this.efRecords = efRecords;
+            discretizationRegions = getDiscretizationRegions(fullObservationSet, true);
             fullObservationSet = TrainingSetDiscretization(fullObservationSet);
         }
 
@@ -120,7 +123,7 @@ class TrainingSet {
                 regionMean *= 100;
                 regionMean = (double)((int) regionMean);
                 regionMean /= 100;
-                if(feature > region[0] && feature < region[1]){
+                if(feature > region[0] && feature <= region[1]){
                     signleObservation.attributes.set(i, regionMean);
                 }
             }
@@ -139,7 +142,7 @@ class TrainingSet {
         return fullObservationSet;
     }
 
-    public List<List<double[]>> getDiscretizationRegions(List<Observation> fullObservationSet){
+    public List<List<double[]>> getDiscretizationRegionsEqualWidth(List<Observation> fullObservationSet){
 
         Double maxFeature;
         Double minFeature;
@@ -148,13 +151,14 @@ class TrainingSet {
         double[] intervalBounds;
         List<double[]> featureInter;
         List<List<double[]>> intervals = new ArrayList<List<double[]>>();
-        List<Double> featureList = new ArrayList<Double>();
+        List<Double> featureList;
         int featuresNumber = fullObservationSet.get(0).attributes.size();
 
         // Get feature list
         for(int i = 0; i < featuresNumber; i++){
 
             featureInter = new ArrayList<double[]>();
+            featureList = new ArrayList<Double>();
 
             for(Observation feature: fullObservationSet){
                 featureList.add(feature.attributes.get(i));
@@ -176,6 +180,58 @@ class TrainingSet {
             intervals.add(featureInter);
         }
         return intervals;
+    }
+
+
+    public List<List<double[]>> getDiscretizationRegionsEqualFrequency(List<Observation> fullObservationSet){
+
+        int counter;
+        double[] intervalBounds;
+        List<double[]> featureInter;
+        List<List<double[]>> intervals = new ArrayList<List<double[]>>();
+        List<Double> featureList;
+        int featuresNumber = fullObservationSet.get(0).attributes.size();
+
+        // Get feature list
+        for(int i = 0; i < featuresNumber; i++){
+
+            featureInter = new ArrayList<double[]>();
+            featureList = new ArrayList<Double>();
+
+            for(Observation feature: fullObservationSet){
+                featureList.add(feature.attributes.get(i));
+            }
+
+            Collections.sort(featureList);
+
+            counter = 0;
+            while(counter < featureList.size() - efRecords){
+                intervalBounds = new double[2];
+                intervalBounds[0] = featureList.get(counter);
+                intervalBounds[1] = featureList.get(counter + efRecords);
+                counter += efRecords;
+                featureInter.add(intervalBounds);
+            }
+            intervalBounds = featureInter.get(featureInter.size() - 1);
+            intervalBounds[1] = featureList.get(featureList.size() - 1);
+            featureInter.set(featureInter.size() - 1, intervalBounds);
+            intervals.add(featureInter);
+        }
+        return intervals;
+    }
+
+    public List<List<double[]>> getDiscretizationRegions(List<Observation> fullObservationSet, boolean equalFrequency){
+
+        List<List<double[]>> regions;
+
+        if(equalFrequency){
+            regions = getDiscretizationRegionsEqualFrequency(fullObservationSet);
+        }
+        else{
+            regions = getDiscretizationRegionsEqualWidth(fullObservationSet);
+        }
+
+        return regions;
     }
 
     public List<Observation> generateObservationList(List<List<Double>> parsedRecords, boolean classPos){

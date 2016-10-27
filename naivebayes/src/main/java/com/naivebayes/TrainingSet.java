@@ -1,9 +1,11 @@
 package com.naivebayes;
 
+import java.io.IOException;
 import java.util.*;
 
 import static java.lang.Math.pow;
 import static java.lang.Math.sqrt;
+import static java.lang.Math.round;
 
 /**
  * Created by filip on 18.10.16.
@@ -33,8 +35,11 @@ class TrainingSet {
 
     public final static double dataSetParts = 10.0;
 
+    double bins;
     double[] meanVal;
     double[] std;
+    boolean discreteValues;
+    List<List<double[]>> discretizationRegions;
     private List<List<Observation>> crossValidationSets;
     private List<Observation> trainingSet;
     private List<Observation> testSet;
@@ -42,26 +47,147 @@ class TrainingSet {
     private int testIndex;
 
     // Training set constructor
-    public TrainingSet(List<List<Double>> fullSet, boolean classPosition){
+    public TrainingSet(String dataPath, boolean classPosition, boolean discreteValues) throws IOException {
+
+        // Full set initialization
+        List<List<Double>> fullSet;
 
         //Private Initialization
         crossValidationSets = new ArrayList<List<Observation>>();
         trainingSet = new ArrayList<Observation>();
         testSet = new ArrayList<Observation>();
         classes = new HashSet<Double>();
+        this.discreteValues = discreteValues;
+
+        //Get data from file
+        DataFile dt = new DataFile(dataPath);
+        fullSet = dt.getDataset();
+
+        //Local variables
+        List<Observation> fullObservationSet;
+
+        // Generate Observation List
+        fullObservationSet = generateObservationList(fullSet, classPosition);
+
+        //Only for discrete values
+        if(discreteValues){
+            bins = 20;
+            discretizationRegions = getDiscretizationRegions(fullObservationSet);
+            fullObservationSet = TrainingSetDiscretization(fullObservationSet);
+        }
+
+        // Prepare CrossValidation Set
+        prepareCrossValidationSets(fullObservationSet);
+
+        // Select First Training Set
+        testIndex = 0;
+        List<Observation> copiedList = new ArrayList<Observation>();
+        for(Observation obs: crossValidationSets.get(testIndex)){
+            copiedList.add(obs.clone());
+        }
+
+        testSet.addAll(copiedList);
+        for(List<Observation> cvSet: crossValidationSets.subList(1, crossValidationSets.size())){
+            List<Observation> copiedCvSet = new ArrayList<Observation>();
+            for(Observation obs: cvSet){
+                copiedCvSet.add(obs.clone());
+            }
+            trainingSet.addAll(copiedCvSet);
+        }
+
+        // Not for discrete values
+        if(!discreteValues){
+            // Calculate mean for existing dataset
+            meanVal = mean(trainingSet);
+            std = stddev(trainingSet);
+        }
+
+    }
+    public Observation discretize(Observation signleObservation){
+
+        double feature;
+        double regionMean;
+        List<double[]> featureRegions;
+        int featuresNumber = signleObservation.attributes.size();
+
+        // Iterate over features
+        for(int i = 0; i < featuresNumber; i++){
+            // Get discretization regions
+            feature = signleObservation.attributes.get(i);
+            featureRegions = discretizationRegions.get(i);
+            for (double[] region : featureRegions) {
+                regionMean = (region[0] + region[1]) / 2;
+                regionMean *= 100;
+                regionMean = (double)((int) regionMean);
+                regionMean /= 100;
+                if(feature > region[0] && feature < region[1]){
+                    signleObservation.attributes.set(i, regionMean);
+                }
+            }
+        }
+
+        return signleObservation;
+    }
+
+    public List<Observation> TrainingSetDiscretization(List<Observation> fullObservationSet){
+
+        for(int i = 0; i < fullObservationSet.size(); i++){
+            Observation obs = discretize(fullObservationSet.get(i));
+            fullObservationSet.set(i, obs);
+        }
+
+        return fullObservationSet;
+    }
+
+    public List<List<double[]>> getDiscretizationRegions(List<Observation> fullObservationSet){
+
+        Double maxFeature;
+        Double minFeature;
+        Double interval;
+        double lowBoundary;
+        double[] intervalBounds;
+        List<double[]> featureInter;
+        List<List<double[]>> intervals = new ArrayList<List<double[]>>();
+        List<Double> featureList = new ArrayList<Double>();
+        int featuresNumber = fullObservationSet.get(0).attributes.size();
+
+        // Get feature list
+        for(int i = 0; i < featuresNumber; i++){
+
+            featureInter = new ArrayList<double[]>();
+
+            for(Observation feature: fullObservationSet){
+                featureList.add(feature.attributes.get(i));
+            }
+
+            maxFeature = Collections.max(featureList);
+            minFeature = Collections.min(featureList);
+            interval = (maxFeature - minFeature) / bins;
+
+            lowBoundary = minFeature;
+
+            while(lowBoundary <= maxFeature){
+                intervalBounds = new double[2];
+                intervalBounds[0] = lowBoundary;
+                intervalBounds[1] = lowBoundary + interval;
+                featureInter.add(intervalBounds);
+                lowBoundary += interval;
+            }
+            intervals.add(featureInter);
+        }
+        return intervals;
+    }
+
+    public List<Observation> generateObservationList(List<List<Double>> parsedRecords, boolean classPos){
 
         // Local variables initialization
         List<Observation> fullObservationSet = new ArrayList<Observation>();
-        Map<Double, List<Observation>> classRecords = new HashMap<Double, List<Observation>>();
-        Map<Double, Integer> numClassRec = new HashMap<Double, Integer>();
-        List<Observation> tmpObservationList;
         List<Double> obsAttributes;
         Double classObservation;
-        int obsNumber;
 
         // Find Data Set classes and create fullObservationSet
-        for(List<Double> singleObservation: fullSet){
-            if(classPosition){
+        for(List<Double> singleObservation: parsedRecords){
+            if(classPos){
                 obsAttributes = singleObservation.subList(1, singleObservation.size());
                 classObservation = singleObservation.get(0);
             }
@@ -73,7 +199,16 @@ class TrainingSet {
             fullObservationSet.add(new Observation(obsAttributes, classObservation.intValue()));
         }
 
-        // Assign Observation
+        return fullObservationSet;
+    }
+
+    public void prepareCrossValidationSets(List<Observation> fullObservationSet){
+
+        int obsNumber;
+        Map<Double, List<Observation>> classRecords = new HashMap<Double, List<Observation>>();
+        Map<Double, Integer> numClassRec = new HashMap<Double, Integer>();
+        List<Observation> tmpObservationList;
+
         for(Double signleClass: classes){
             List<Observation> tmpRecList = TrainingSet.getTrainingDataByClass(signleClass.intValue(),
                     fullObservationSet);
@@ -98,26 +233,6 @@ class TrainingSet {
             crossValidationSets.add(tmpObservationList);
         }
 
-        // Select First Training Set
-        testIndex = 0;
-        List<Observation> copiedList = new ArrayList<Observation>();
-        for(Observation obs: crossValidationSets.get(testIndex)){
-            copiedList.add(obs.clone());
-        }
-
-        testSet.addAll(copiedList);
-        for(List<Observation> cvSet: crossValidationSets.subList(1, crossValidationSets.size())){
-            List<Observation> copiedCvSet = new ArrayList<Observation>();
-            for(Observation obs: cvSet){
-                copiedCvSet.add(obs.clone());
-            }
-            trainingSet.addAll(copiedCvSet);
-        }
-
-
-        // Calculate mean for existing dataset
-        meanVal = mean(trainingSet);
-        std = stddev(trainingSet);
     }
 
     public void shuffle(){
@@ -142,9 +257,11 @@ class TrainingSet {
             }
         }
 
-        // Calculate new mean and stddev
-        meanVal = mean(trainingSet);
-        std = stddev(trainingSet);
+        if(!discreteValues){
+            // Calculate new mean and stddev
+            meanVal = mean(trainingSet);
+            std = stddev(trainingSet);
+        }
     }
 
     public static double[] sum(List<Observation> dataSet){

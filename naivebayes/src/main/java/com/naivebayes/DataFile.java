@@ -47,7 +47,7 @@ class DataFile {
     }
 
     // Get Data Set
-    public TrainingSet getDataset(boolean classPosition) throws IOException {
+    public List<List<Double>> getDataset() throws IOException {
         List<List<Double>> observationSet = new ArrayList<List<Double>>();
         List<Double> signleObservation;
 
@@ -55,7 +55,7 @@ class DataFile {
             observationSet.add(signleObservation);
         }
 
-        return new TrainingSet(observationSet, classPosition);
+        return observationSet;
 
     }
 

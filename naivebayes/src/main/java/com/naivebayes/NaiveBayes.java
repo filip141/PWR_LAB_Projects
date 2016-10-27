@@ -10,15 +10,20 @@ import static java.lang.Math.sqrt;
 /**
  * Created by filip on 19.10.16.
  */
-public class NaiveBayes {
+public abstract class NaiveBayes {
 
+    private boolean discrete;
     private TrainingSet trainingSet;
 
-    public NaiveBayes(String dataPath, boolean classPosition){
-        DataFile dt = new DataFile(dataPath);
+    public NaiveBayes(String dataPath, boolean classPosition, boolean discretValues){
         try {
-            this.trainingSet = dt.getDataset(classPosition);
-            this.trainingSet.normTrainingSet();
+            this.discrete = discretValues;
+            this.trainingSet =new TrainingSet(dataPath, classPosition, discretValues);
+            // Normalize only for discrete values
+            if(!discretValues){
+                this.trainingSet.normTrainingSet();
+            }
+
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -26,7 +31,9 @@ public class NaiveBayes {
 
     public void shuffleTrainingSet(){
         this.trainingSet.shuffle();
-        this.trainingSet.normTrainingSet();
+        if(!discrete){
+            this.trainingSet.normTrainingSet();
+        }
     }
 
     // Calculate probability from Gaussian
@@ -71,6 +78,45 @@ public class NaiveBayes {
         return finalResult;
     }
 
+    public int predictDiscrete(List<Double> prediction){
+
+        Observation obs;
+        int finalResult = 0;
+        List<Observation> trainingByID;
+        obs = new Observation(prediction, 0);
+        obs = trainingSet.discretize(obs);
+
+        int counterAll;
+        int counterStrike;
+        double tmpPrediction;
+        Set<Double> classes = trainingSet.getClasses();
+        Map<Double, Double> predictResults = new HashMap<Double, Double>();
+        for(Double nbClass: classes){
+            tmpPrediction = 1.0;
+            trainingByID = TrainingSet.getTrainingDataByClass(nbClass.intValue(), trainingSet.getTrainingData());
+            counterAll = trainingByID.size();
+            for(int i = 0; i < obs.attributes.size(); i++){
+                counterStrike = 1;
+                for (Observation trainObs: trainingByID){
+                    if(trainObs.attributes.get(i).equals(obs.attributes.get(i))){
+                        counterStrike += 1;
+                    }
+                }
+                tmpPrediction *= counterStrike / (1.0 * counterAll);
+            }
+            predictResults.put(nbClass, tmpPrediction);
+        }
+
+        Double maxValueInMap = (Collections.max(predictResults.values()));
+        for (Map.Entry<Double, Double> entry : predictResults.entrySet()) {
+            if (entry.getValue().equals(maxValueInMap)) {
+                finalResult = entry.getKey().intValue();
+            }
+        }
+
+        return finalResult;
+    }
+
     public Map<Double, Map<Double, Double>> getConfusionMatrix(){
 
         // Variable initialization
@@ -94,7 +140,7 @@ public class NaiveBayes {
         // Create confusionMatrix
         for(int tr = 0; tr < 10; tr++){
             for(Observation testedObs: testSet){
-                predictedClass = (double) this.predict(testedObs.attributes);
+                predictedClass = (double) this.predictDiscrete(testedObs.attributes);
                 tmpMapRecord = confusionMatrix.get((double) testedObs.label);
                 recordCounter = tmpMapRecord.get(predictedClass) + 1;
                 tmpMapRecord.put(predictedClass, recordCounter);

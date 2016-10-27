@@ -10,8 +10,8 @@ public class App
 {
     public static void main( String[] args )
     {
-        String testedDataset = "breast_cancer.data";
-        NaiveBayes nb = new NaiveBayes(testedDataset, false);
+        String testedDataset = "ionosphere.data";
+        NaiveBayes nb = new NaiveBayes(testedDataset, false, true);
 
         // Print messages
         System.out.println("Testing Naive Bayes Classifier.\n");

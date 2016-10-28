@@ -35,12 +35,12 @@ class TrainingSet {
 
     public final static double dataSetParts = 10.0;
 
-    double bins;
-    int efRecords;
-    double[] meanVal;
-    double[] std;
-    boolean discreteValues;
-    List<List<double[]>> discretizationRegions;
+    private double bins;
+    private int efRecords;
+    private double[] meanVal;
+    private double[] std;
+    private boolean discreteValues;
+    private List<List<double[]>> discretizationRegions;
     private List<List<Observation>> crossValidationSets;
     private List<Observation> trainingSet;
     private List<Observation> testSet;
@@ -75,7 +75,7 @@ class TrainingSet {
         if(discreteValues){
             this.bins = bins;
             this.efRecords = efRecords;
-            discretizationRegions = getDiscretizationRegions(fullObservationSet, true);
+            discretizationRegions = getDiscretizationRegions(fullObservationSet, equalFrequency);
             fullObservationSet = TrainingSetDiscretization(fullObservationSet);
         }
 
@@ -166,7 +166,16 @@ class TrainingSet {
 
             maxFeature = Collections.max(featureList);
             minFeature = Collections.min(featureList);
-            interval = (maxFeature - minFeature) / bins;
+            interval = (maxFeature - minFeature) / (1.0 * bins);
+
+            if(interval.equals(0.0)){
+                intervalBounds = new double[2];
+                intervalBounds[0] = 0;
+                intervalBounds[1] = 0;
+                featureInter.add(intervalBounds);
+                intervals.add(featureInter);
+                continue;
+            }
 
             lowBoundary = minFeature;
 

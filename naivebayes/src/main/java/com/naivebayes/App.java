@@ -12,7 +12,7 @@ public class App
     public static void main( String[] args )
     {
         String testedDataset = "pima-indians-diabetes.data";
-        NaiveBayes nb = new ContinuousNaiveBayes(testedDataset, false);
+        NaiveBayes nb = new DiscreteNaiveBayes(testedDataset, false, 20, true, 15);
 
         // Print messages
         System.out.println("Testing Naive Bayes Classifier.\n");
@@ -48,6 +48,7 @@ public class App
         System.out.println("\nNaive Bayes Accuracy: " + nb.getAccuracy(confusionMatrix));
         System.out.println("\nNaive Bayes Misclassification Rate: " + nb.getMissClassRate(confusionMatrix));
 
+        double recall = 0;
         System.out.println();
         System.out.println("Recall Matrix: ");
         Map<Double, Map<Double, Double>> recallMatrix = nb.getRecall(confusionMatrix);
@@ -57,10 +58,19 @@ public class App
                 Double tmpVar = recordRow.get(predMapKey);
                 System.out.print("  ");
                 System.out.printf("%.2f", tmpVar);
+                if(predMapKey.equals(actMapKey)){
+                    recall += tmpVar;
+                }
             }
             System.out.println();
         }
 
+        System.out.println();
+        System.out.print("Recall: ");
+        System.out.println(recall / recallMatrix.keySet().size());
+        System.out.println();
+
+        double precise = 0;
         System.out.println();
         System.out.println("Precision Matrix: ");
         Map<Double, Map<Double, Double>> precMatrix = nb.getPrecision(confusionMatrix);
@@ -70,19 +80,30 @@ public class App
                 Double tmpVar = recordRow.get(predMapKey);
                 System.out.print("  ");
                 System.out.printf("%.2f", tmpVar);
+                if(predMapKey.equals(actMapKey)){
+                    precise += tmpVar;
+                }
             }
             System.out.println();
         }
-
+        System.out.println();
+        System.out.print("Precision: ");
+        System.out.println(precise / precMatrix.keySet().size());
         System.out.println();
         System.out.println("F1 score: ");
         System.out.println();
+        double f1score = 0;
         List<Double> fsCore = nb.getFsCore(confusionMatrix);
         for(Double core: fsCore){
+            f1score += core;
             System.out.printf("%.2f", core);
             System.out.print("    ");
         }
+
         System.out.println();
+        System.out.println();
+        System.out.print("F1-score: ");
+        System.out.println(f1score / fsCore.size());
 
 
     }

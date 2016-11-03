@@ -11,8 +11,8 @@ public class App
 {
     public static void main( String[] args )
     {
-        String testedDataset = "pima-indians-diabetes.data";
-        NaiveBayes nb = new DiscreteNaiveBayes(testedDataset, false, 20, true, 15);
+        String testedDataset = "glass.data";
+        NaiveBayes nb = new DiscreteNaiveBayes(testedDataset, false, 15, true, 50);
 
         // Print messages
         System.out.println("Testing Naive Bayes Classifier.\n");

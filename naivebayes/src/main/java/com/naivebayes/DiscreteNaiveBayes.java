@@ -47,9 +47,9 @@ public class DiscreteNaiveBayes extends NaiveBayes {
                         counterStrike += 1;
                     }
                 }
-                tmpPrediction *= counterStrike / (1.0 * counterAll);
+                tmpPrediction *= counterStrike / (1.0 * counterAll + 1.0);
             }
-            predictResults.put(nbClass, tmpPrediction);
+            predictResults.put(nbClass, (counterAll / (1.0 * trainingSet.getTrainingData().size())) * tmpPrediction);
         }
 
         Double maxValueInMap = (Collections.max(predictResults.values()));

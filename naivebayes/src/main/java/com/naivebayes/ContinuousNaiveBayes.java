@@ -40,6 +40,7 @@ public class ContinuousNaiveBayes extends NaiveBayes {
         double[] stdevs;
         double tmpPrediction;
         int finalResult = 0;
+        List <Observation> trainByID;
         List<Double> predictionNew = trainingSet.normalizeRecord(prediction);
 
         // Define predict classes and map
@@ -48,14 +49,14 @@ public class ContinuousNaiveBayes extends NaiveBayes {
         for(Double nbClass: classes){
             tmpPrediction = 1;
             // Define mean and std_dev
-            means = TrainingSet.mean(TrainingSet.getTrainingDataByClass(nbClass.intValue(),
-                    trainingSet.getTrainingData()));
-            stdevs = TrainingSet.stddev(TrainingSet.getTrainingDataByClass(nbClass.intValue(),
-                    trainingSet.getTrainingData()));
+            trainByID  = TrainingSet.getTrainingDataByClass(nbClass.intValue(), trainingSet.getTrainingData());
+            means = TrainingSet.mean(trainByID);
+            stdevs = TrainingSet.stddev(trainByID);
             for(int i = 0; i < predictionNew.size(); i++){
                 tmpPrediction *= calculateGaussianProb(predictionNew.get(i), means[i], stdevs[i]);
             }
-            predictResults.put(nbClass, tmpPrediction);
+            predictResults.put(nbClass, (trainByID.size() /
+                    (1.0 * trainingSet.getTrainingData().size())) * tmpPrediction);
         }
         Double maxValueInMap = (Collections.max(predictResults.values()));
         for (Map.Entry<Double, Double> entry : predictResults.entrySet()) {

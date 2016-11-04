@@ -52,7 +52,6 @@ public abstract class NaiveBayes {
                 tmpMapRecord.put(predictedClass, recordCounter);
                 confusionMatrix.put((double) testedObs.label, tmpMapRecord);
             }
-
             // Shuffle
             shuffleTrainingSet();
         }

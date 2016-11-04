@@ -58,7 +58,6 @@ public class DiscreteNaiveBayes extends NaiveBayes {
                 finalResult = entry.getKey().intValue();
             }
         }
-
         return finalResult;
     }
 

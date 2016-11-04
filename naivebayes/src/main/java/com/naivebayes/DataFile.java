@@ -56,7 +56,6 @@ class DataFile {
         }
 
         return observationSet;
-
     }
 
 }

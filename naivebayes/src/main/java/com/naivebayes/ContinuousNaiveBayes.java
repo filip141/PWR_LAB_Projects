@@ -64,7 +64,6 @@ public class ContinuousNaiveBayes extends NaiveBayes {
                 finalResult = entry.getKey().intValue();
             }
         }
-
         return finalResult;
     }
 

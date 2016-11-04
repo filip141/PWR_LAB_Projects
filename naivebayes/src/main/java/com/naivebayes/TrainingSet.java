@@ -437,7 +437,6 @@ class TrainingSet {
         }
 
         this.trainingSet = newTrainingSet;
-
     }
 
     public List<Observation> getTrainingData(){

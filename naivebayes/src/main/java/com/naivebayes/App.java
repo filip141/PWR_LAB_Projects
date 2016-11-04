@@ -12,7 +12,7 @@ public class App
     public static void main( String[] args )
     {
         String testedDataset = "glass.data";
-        NaiveBayes nb = new DiscreteNaiveBayes(testedDataset, false, 15, true, 50);
+        NaiveBayes nb = new DiscreteNaiveBayes(testedDataset, false, 14, true, 50);
 
         // Print messages
         System.out.println("Testing Naive Bayes Classifier.\n");

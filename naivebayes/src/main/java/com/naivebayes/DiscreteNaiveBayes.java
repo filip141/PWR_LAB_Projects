@@ -7,16 +7,17 @@ import java.util.*;
  */
 public class DiscreteNaiveBayes extends NaiveBayes {
 
-    public DiscreteNaiveBayes(String dataPath, boolean classPosition, int bins, boolean equalFrequency, int efRecords) {
-        super(dataPath, classPosition, true, bins, equalFrequency, efRecords);
+    public DiscreteNaiveBayes(String dataPath, boolean classPosition, int bins, boolean equalFrequency,
+                              int efRecords, boolean randomCv) {
+        super(dataPath, classPosition, true, bins, equalFrequency, efRecords, randomCv);
     }
 
     public DiscreteNaiveBayes(String dataPath, boolean classPosition){
-        super(dataPath, classPosition, true, 20, true, 5);
+        super(dataPath, classPosition, true, 20, true, 5, false);
     }
 
     public DiscreteNaiveBayes(String dataPath){
-        super(dataPath, false, true, 20, true, 5);
+        super(dataPath, false, true, 20, true, 5, false);
     }
 
     public void shuffleTrainingSet(){

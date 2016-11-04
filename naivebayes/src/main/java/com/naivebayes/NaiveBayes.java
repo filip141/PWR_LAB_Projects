@@ -11,9 +11,10 @@ public abstract class NaiveBayes {
     protected TrainingSet trainingSet;
 
     public NaiveBayes(String dataPath, boolean classPosition, boolean discretValues, int bins,
-                      boolean equalFrequency, int efRec){
+                      boolean equalFrequency, int efRec, boolean randomCv){
         try {
-            this.trainingSet =new TrainingSet(dataPath, classPosition, discretValues, bins, equalFrequency, efRec);
+            this.trainingSet =new TrainingSet(dataPath, classPosition, discretValues, bins, equalFrequency,
+                    efRec, randomCv);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -29,7 +30,7 @@ public abstract class NaiveBayes {
         Double recordCounter;
         Double predictedClass;
         Map<Double, Double> tmpMapRecord;
-        List<Observation> testSet = trainingSet.getTestData();
+        List<Observation> testSet;
 
         // Declare confusion Matrix map
         Map<Double, Map<Double, Double>> confusionMatrix = new HashMap<Double, Map<Double, Double>>();
@@ -45,6 +46,7 @@ public abstract class NaiveBayes {
 
         // Create confusionMatrix
         for(int tr = 0; tr < 10; tr++){
+            testSet = trainingSet.getTestData();
             for(Observation testedObs: testSet){
                 predictedClass = (double) this.predict(testedObs.attributes);
                 tmpMapRecord = confusionMatrix.get((double) testedObs.label);

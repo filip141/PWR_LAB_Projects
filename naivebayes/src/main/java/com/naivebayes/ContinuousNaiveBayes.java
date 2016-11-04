@@ -11,12 +11,17 @@ import static java.lang.Math.sqrt;
  */
 public class ContinuousNaiveBayes extends NaiveBayes {
     public ContinuousNaiveBayes(String dataPath, boolean classPosition) {
-        super(dataPath, classPosition, false, 20, true, 20);
+        super(dataPath, classPosition, false, 20, true, 20, false);
         this.trainingSet.normTrainingSet();
     }
 
     public ContinuousNaiveBayes(String dataPath){
-        super(dataPath, false, false, 20, true, 20);
+        super(dataPath, false, false, 20, true, 20, false);
+        this.trainingSet.normTrainingSet();
+    }
+
+    public ContinuousNaiveBayes(String dataPath, boolean classPosition, boolean randomCv) {
+        super(dataPath, classPosition, false, 20, true, 20, randomCv);
         this.trainingSet.normTrainingSet();
     }
 

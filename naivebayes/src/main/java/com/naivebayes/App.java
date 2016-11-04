@@ -11,8 +11,8 @@ public class App
 {
     public static void main( String[] args )
     {
-        String testedDataset = "glass.data";
-        NaiveBayes nb = new DiscreteNaiveBayes(testedDataset, false, 14, true, 50);
+        String testedDataset = "ionosphere.data";
+        NaiveBayes nb = new DiscreteNaiveBayes(testedDataset, false, 22, false, 36, true);
 
         // Print messages
         System.out.println("Testing Naive Bayes Classifier.\n");

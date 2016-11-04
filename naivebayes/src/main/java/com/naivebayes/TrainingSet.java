@@ -49,7 +49,7 @@ class TrainingSet {
 
     // Training set constructor
     public TrainingSet(String dataPath, boolean classPosition, boolean discreteValues, int bins,
-                       boolean equalFrequency, int efRecords) throws IOException {
+                       boolean equalFrequency, int efRecords, boolean randomCv) throws IOException {
 
         // Full set initialization
         List<List<Double>> fullSet;
@@ -79,8 +79,15 @@ class TrainingSet {
             fullObservationSet = TrainingSetDiscretization(fullObservationSet);
         }
 
-        // Prepare CrossValidation Set
-        prepareCrossValidationSets(fullObservationSet);
+        if(randomCv){
+            // Prepare CrossValidation Set
+            prepareRandomCrossValidationSets(fullObservationSet);
+        }
+        else{
+            // Prepare CrossValidation Set
+            prepareCrossValidationSets(fullObservationSet);
+        }
+
 
         // Select First Training Set
         testIndex = 0;
@@ -265,6 +272,30 @@ class TrainingSet {
         }
 
         return fullObservationSet;
+    }
+
+    public void prepareRandomCrossValidationSets(List<Observation> fullObservationSet){
+
+        int indexNumber;
+        Random rand = new Random();
+        List<Observation> tmpObservationList;
+
+        // Prepare cross validation sets
+        for(int i = 0; i < TrainingSet.dataSetParts; i++){
+            tmpObservationList = new ArrayList<Observation>();
+            crossValidationSets.add(tmpObservationList);
+        }
+
+        int i = 0;
+        // Prepare cross validation sets
+        while(!fullObservationSet.isEmpty()){
+            tmpObservationList = crossValidationSets.get(i);
+            indexNumber = rand.nextInt(fullObservationSet.size());
+            tmpObservationList.add(fullObservationSet.get(indexNumber));
+            crossValidationSets.set(i, tmpObservationList);
+            fullObservationSet.remove(indexNumber);
+            i = (i + 1) % (int) TrainingSet.dataSetParts;
+        }
     }
 
     public void prepareCrossValidationSets(List<Observation> fullObservationSet){

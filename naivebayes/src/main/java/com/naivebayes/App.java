@@ -105,6 +105,5 @@ public class App
         System.out.print("F1-score: ");
         System.out.println(f1score / fsCore.size());
 
-
     }
 }

@@ -103,7 +103,6 @@ class TrainingSet {
             }
             trainingSet.addAll(copiedCvSet);
         }
-//        trainingSet = fullObservationSet;//TODO
 
         // Not for discrete values
         if(!discreteValues){

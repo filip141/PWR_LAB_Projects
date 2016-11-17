@@ -10,7 +10,6 @@ public class ILADecisionTree extends DecisionTree {
 
     private TrainingSet trainingSet;
     private List<PatternPair> rules;
-    private Map<Integer, List<HashSet<Integer>>> featureCombination;
     Map<Integer, List<Observation>> subTableMap;
 
     public ILADecisionTree(String dataPath, boolean classPosition, int bins, boolean equalFrequency,
@@ -19,7 +18,6 @@ public class ILADecisionTree extends DecisionTree {
         try {
             this.trainingSet =new TrainingSet(dataPath, classPosition, true, bins, equalFrequency,
                     efRec, randomCv);
-            this.featureCombination = constructCombinations();
             divideSubTables();
         } catch (IOException e) {
             e.printStackTrace();
@@ -39,51 +37,31 @@ public class ILADecisionTree extends DecisionTree {
         }
     }
 
-    public List<HashSet<Integer>> getAllCombination(List<Integer> objectList){
-        int combinationSize;
-        HashSet<Integer> uniqueObjects = new HashSet<Integer>(objectList);
-        List<HashSet<Integer>> combinations = new ArrayList<HashSet<Integer>>();
-
-        for(Integer obj: uniqueObjects){
-            combinationSize = combinations.size();
-            for (int i = 0; i < combinationSize; i++) {
-                HashSet<Integer> insideSet = new HashSet<Integer>(combinations.get(i));
-                insideSet.add(obj);
-                combinations.add(insideSet);
-            }
-            HashSet<Integer> singleSet = new HashSet<Integer>();
-            singleSet.add(obj);
-            combinations.add(singleSet);
-        }
-        return combinations;
-    }
-
-    public Map<Integer, List<HashSet<Integer>>> constructCombinations(){
-        List<HashSet<Integer>> combinations;
+    public List<HashSet<Integer>> constructNCombination(int maxSize){
+        List<HashSet<Integer>> combSet = new ArrayList<HashSet<Integer>>();
+        List<List<Double>> perArray = new ArrayList<List<Double>>();
+        List<Double> featureIndexList = new ArrayList<Double>();
         int numberOfFeatures = trainingSet.getTrainingData().get(0).attributes.size();
-        List<Integer> featureIndexList = new ArrayList<Integer>();
-        Map<Integer, List<HashSet<Integer>>> combinationPerSize = new HashMap<Integer, List<HashSet<Integer>>>();
-
         // Generate List
         for(int i=0; i < numberOfFeatures; i++){
-            featureIndexList.add(i);
+            featureIndexList.add((double)i);
         }
 
-        // Generate permutation
-        combinations = getAllCombination(featureIndexList);
-        for(HashSet<Integer> perSet: combinations){
-            List<HashSet<Integer>> combPerSize = combinationPerSize.get(perSet.size());
-            if(combPerSize == null){
-                combPerSize = new ArrayList<HashSet<Integer>>();
-                combPerSize.add(perSet);
-            }
-            else{
-                combPerSize.add(perSet);
-            }
-            combinationPerSize.put(perSet.size(), combPerSize);
+        for(int j=0; j < maxSize; j++){
+            perArray.add(featureIndexList);
         }
-
-        return combinationPerSize;
+        // Construct desired format
+        List<LinkedHashSet<Double>> tmpCombHashSet = itemsPermutation(perArray, perArray.size() - 1);
+        for(LinkedHashSet<Double> insSet: tmpCombHashSet){
+            HashSet<Integer> tmpSet = new HashSet<Integer>();
+            for(Double val: insSet){
+                tmpSet.add(val.intValue());
+            }
+            if(tmpSet.size() == maxSize){
+                combSet.add(tmpSet);
+            }
+        }
+        return combSet;
     }
 
     public List<Observation> copyTable(List<Observation> tableToCopy){
@@ -193,7 +171,7 @@ public class ILADecisionTree extends DecisionTree {
             perm = 1;
             List<Observation> localTable = copyTable(subTableMap.get(extClass));
             while(localTable.size() > 0){
-                List<HashSet<Integer>> localPermutation = featureCombination.get(perm);
+                List<HashSet<Integer>> localPermutation = constructNCombination(perm);
                 if(localPermutation == null){
                     break;
                 }

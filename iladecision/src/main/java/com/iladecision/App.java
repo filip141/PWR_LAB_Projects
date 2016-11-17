@@ -14,8 +14,8 @@ public class App
     public static void main( String[] args )
     {
 
-        String testedDataset = "glass.data";
-        ILADecisionTree ilaTree = new ILADecisionTree(testedDataset, false,  50, true, 18, true);
+        String testedDataset = "breast_cancer.data";
+        ILADecisionTree ilaTree = new ILADecisionTree(testedDataset, true,  50, true, 18, true);
         ilaTree.train();
 
         // Print messages

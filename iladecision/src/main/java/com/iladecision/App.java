@@ -14,7 +14,7 @@ public class App
     public static void main( String[] args )
     {
 
-        String testedDataset = "breast_cancer.data";
+        String testedDataset = "pima-indians-diabetes.data";
         ILADecisionTree ilaTree = new ILADecisionTree(testedDataset, false,  50, false, 18, true);
         ilaTree.train();
 

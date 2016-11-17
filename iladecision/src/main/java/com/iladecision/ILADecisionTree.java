@@ -51,7 +51,7 @@ public class ILADecisionTree extends DecisionTree {
             perArray.add(featureIndexList);
         }
         // Construct desired format
-        List<LinkedHashSet<Double>> tmpCombHashSet = itemsPermutation(perArray, perArray.size() - 1);
+        HashSet<LinkedHashSet<Double>> tmpCombHashSet = itemsPermutation(perArray, perArray.size() - 1);
         for(LinkedHashSet<Double> insSet: tmpCombHashSet){
             HashSet<Integer> tmpSet = new HashSet<Integer>();
             for(Double val: insSet){
@@ -121,9 +121,9 @@ public class ILADecisionTree extends DecisionTree {
         return tableColumn;
     }
 
-    public List<LinkedHashSet<Double>> itemsPermutation(List<List<Double>> data,int step){
+    public HashSet<LinkedHashSet<Double>> itemsPermutation(List<List<Double>> data,int step){
         List<Double> tmpList = data.get(step);
-        List<LinkedHashSet<Double>> hsList = new ArrayList<LinkedHashSet<Double>>();
+        HashSet<LinkedHashSet<Double>> hsList = new HashSet<LinkedHashSet<Double>>();
         if(step == 0){
             for(Double attr: tmpList){
                 LinkedHashSet<Double> hsAttr = new LinkedHashSet<Double>();
@@ -134,7 +134,7 @@ public class ILADecisionTree extends DecisionTree {
         }
         else{
             for(Double attr: tmpList){
-                List<LinkedHashSet<Double>> hsListOld = itemsPermutation(data, step - 1);
+                HashSet<LinkedHashSet<Double>> hsListOld = itemsPermutation(data, step - 1);
                 for(LinkedHashSet<Double> ins: hsListOld){
                     ins.add(attr);
                     hsList.add(ins);
@@ -187,8 +187,7 @@ public class ILADecisionTree extends DecisionTree {
                         List<Double> singleCol = getColumn(idx, localTable);
                         perArray.add(singleCol);
                     }
-                    List<LinkedHashSet<Double>> tmpHashSet = itemsPermutation(perArray, perArray.size() - 1);
-                    hsPerm = new HashSet<LinkedHashSet<Double>>(tmpHashSet);
+                    hsPerm = itemsPermutation(perArray, perArray.size() - 1);
                     // Remove items from other lists
                     for(Iterator<LinkedHashSet<Double>> iter = hsPerm.iterator(); iter.hasNext();) {
                         LinkedHashSet<Double> hs = iter.next();

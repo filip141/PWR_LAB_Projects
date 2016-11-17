@@ -32,7 +32,7 @@ class Observation {
 
 class TrainingSet {
 
-    public final static double dataSetParts = 10.0;
+    public final static double dataSetParts = 5.0;
 
     private double bins;
     private int efRecords;

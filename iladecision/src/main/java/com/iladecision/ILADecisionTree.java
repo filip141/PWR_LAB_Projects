@@ -163,18 +163,20 @@ public class ILADecisionTree extends DecisionTree {
 
     public void train(){
         int perm;
+        int attributesNumber;
         PatternPair maxPair;
         rules = new ArrayList<PatternPair>();
+        attributesNumber = trainingSet.getTrainingData().get(0).attributes.size();
 
         // Every Permutation
         for(Integer extClass: subTableMap.keySet()){
             perm = 1;
             List<Observation> localTable = copyTable(subTableMap.get(extClass));
             while(localTable.size() > 0){
-                List<HashSet<Integer>> localPermutation = constructNCombination(perm);
-                if(localPermutation == null){
+                if(perm > attributesNumber){
                     break;
                 }
+                List<HashSet<Integer>> localPermutation = constructNCombination(perm);
                 List<PatternPair> maxCounts = new ArrayList<PatternPair>();
                 for(HashSet<Integer> singlePermutation: localPermutation){
                     HashSet<LinkedHashSet<Double>> hsPerm;

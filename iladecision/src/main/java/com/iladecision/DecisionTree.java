@@ -68,7 +68,7 @@ public abstract class DecisionTree {
         }
 
         // Create confusionMatrix
-        for(int tr = 0; tr < 10; tr++){
+        for(int tr = 0; tr < TrainingSet.dataSetParts; tr++){
             testSet = trainingSet.getTestData();
             for(Observation testedObs: testSet){
                 predictedClass = (double) this.predict(testedObs.attributes);

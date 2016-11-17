@@ -24,15 +24,13 @@ class Observation {
             newList.add(num);
         }
 
-        Observation o = new Observation(newList, this.label);
-
-        return o;
+        return new Observation(newList, this.label);
     }
 }
 
 class TrainingSet {
 
-    public final static double dataSetParts = 5.0;
+    public final static double dataSetParts = 25.0;
 
     private double bins;
     private int efRecords;

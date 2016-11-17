@@ -18,7 +18,6 @@ public class ILADecisionTree extends DecisionTree {
         try {
             this.trainingSet =new TrainingSet(dataPath, classPosition, true, bins, equalFrequency,
                     efRec, randomCv);
-            divideSubTables();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -26,6 +25,7 @@ public class ILADecisionTree extends DecisionTree {
 
     public void shuffleTrainingSet() {
         this.trainingSet.shuffle();
+        train();
     }
 
     public void divideSubTables(){
@@ -167,6 +167,7 @@ public class ILADecisionTree extends DecisionTree {
         PatternPair maxPair;
         rules = new ArrayList<PatternPair>();
         attributesNumber = trainingSet.getTrainingData().get(0).attributes.size();
+        divideSubTables();
 
         // Every Permutation
         for(Integer extClass: subTableMap.keySet()){

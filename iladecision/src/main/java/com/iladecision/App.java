@@ -14,8 +14,8 @@ public class App
     public static void main( String[] args )
     {
 
-        String testedDataset = "ionosphere.data";
-        ILADecisionTree ilaTree = new ILADecisionTree(testedDataset, false,  30, false, 45, false);
+        String testedDataset = "glass.data";
+        ILADecisionTree ilaTree = new ILADecisionTree(testedDataset, false,  50, true, 18, true);
         ilaTree.train();
 
         // Print messages

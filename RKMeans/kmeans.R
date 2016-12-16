@@ -1,5 +1,5 @@
 # Setup Project folder
-setwd('/home/filip/R/Projects/RKMeans')
+setwd('/home/filip/PWR_LAB_Projects/RKMeans')
 
 # Libraries
 library(matrixStats)
@@ -18,7 +18,6 @@ zeros <- function(width, height){
 prepareData <- function(path, crossValidation=TRUE, nfolds=10, classify=TRUE){
 	# Read CSV
 	data = read.csv(path)
-
 	# Labels Mapping
 	if(classify){
 		classLabels = data$label
@@ -276,8 +275,8 @@ recall <- function(confusionMatrix){
 # Main function
 main <- function(){
 	print("Reading data")
-	data = prepareData("RData/wine.csv", crossValidation=TRUE, classify=TRUE)
-	clusterData(data, kmeans=FALSE, classify=TRUE, clusterNumber=3)
+	data = prepareData("RData/iris.csv", crossValidation=TRUE, classify=TRUE, nfolds=10)
+	clusterData(data, kmeans=FALSE, classify=TRUE, clusterNumber=5)
 
 }
 main()

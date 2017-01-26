@@ -1,5 +1,5 @@
 # Setup Project folder
-setwd('/home/filip/PWR_LAB_Projects/RKMeans')
+setwd('c:\\users\\fbach\\IdeaProjects\\PWR_LAB_Projects\\RKMeans')
 
 # Libraries
 library(matrixStats)
@@ -275,8 +275,8 @@ recall <- function(confusionMatrix){
 # Main function
 main <- function(){
 	print("Reading data")
-	data = prepareData("RData/iris.csv", crossValidation=TRUE, classify=TRUE, nfolds=10)
-	clusterData(data, kmeans=FALSE, classify=TRUE, clusterNumber=5)
+	data = prepareData("RData/wine.csv", crossValidation=TRUE, classify=TRUE, nfolds=10)
+	clusterData(data, kmeans=TRUE, classify=TRUE, clusterNumber=3)
 
 }
 main()

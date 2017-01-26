@@ -1,4 +1,4 @@
-package com.iladecision;
+package com.knnproject;
 
 import java.io.IOException;
 import java.util.*;
@@ -8,6 +8,9 @@ import static java.lang.Math.sqrt;
 
 /**
  * Created by filip on 18.10.16.
+ * TrainingSet class representing training set for MachineLearningAlgorithm.
+ * Using this class is easy to process all functionalities connected with
+ * training and test set processing.
  */
 class Observation {
     public List<Double> attributes;
@@ -18,6 +21,8 @@ class Observation {
         this.label = label;
     }
 
+    @Override
+    @SuppressWarnings("CloneDoesntCallSuperClone")
     public Observation clone(){
         List<Double> newList = new ArrayList<Double>();
         for(Double num: attributes){
@@ -30,7 +35,7 @@ class Observation {
 
 class TrainingSet {
 
-    public final static double dataSetParts = 5.0;
+    public final static double dataSetParts = 15.0;
 
     private double bins;
     private int efRecords;
@@ -110,17 +115,18 @@ class TrainingSet {
         }
 
     }
-    public Observation discretize(Observation signleObservation){
+
+    public Observation discretize(Observation singleObservation){
 
         double feature;
         double regionMean;
         List<double[]> featureRegions;
-        int featuresNumber = signleObservation.attributes.size();
+        int featuresNumber = singleObservation.attributes.size();
 
         // Iterate over features
         for(int i = 0; i < featuresNumber; i++){
             // Get discretization regions
-            feature = signleObservation.attributes.get(i);
+            feature = singleObservation.attributes.get(i);
             featureRegions = discretizationRegions.get(i);
             for (double[] region : featureRegions) {
                 regionMean = (region[0] + region[1]) / 2;
@@ -128,12 +134,11 @@ class TrainingSet {
                 regionMean = (double)((int) regionMean);
                 regionMean /= 100;
                 if(feature > region[0] && feature <= region[1]){
-                    signleObservation.attributes.set(i, regionMean);
+                    singleObservation.attributes.set(i, regionMean);
                 }
             }
         }
-
-        return signleObservation;
+        return singleObservation;
     }
 
     public List<Observation> TrainingSetDiscretization(List<Observation> fullObservationSet){
@@ -142,7 +147,6 @@ class TrainingSet {
             Observation obs = discretize(fullObservationSet.get(i));
             fullObservationSet.set(i, obs);
         }
-
         return fullObservationSet;
     }
 
@@ -236,14 +240,12 @@ class TrainingSet {
     public List<List<double[]>> getDiscretizationRegions(List<Observation> fullObservationSet, boolean equalFrequency){
 
         List<List<double[]>> regions;
-
         if(equalFrequency){
             regions = getDiscretizationRegionsEqualFrequency(fullObservationSet);
         }
         else{
             regions = getDiscretizationRegionsEqualWidth(fullObservationSet);
         }
-
         return regions;
     }
 
@@ -267,7 +269,6 @@ class TrainingSet {
             classes.add(classObservation);
             fullObservationSet.add(new Observation(obsAttributes, classObservation.intValue()));
         }
-
         return fullObservationSet;
     }
 
